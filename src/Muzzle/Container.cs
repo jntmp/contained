@@ -5,12 +5,29 @@ namespace Muzzle
     public class Container<T>
     {
         public T PayLoad { get; set; }
-        public Exception Error { get; set; }
+        public Exception Error { get; set; }    
         public bool HasError { get; set; }
+
+        public Container<T> Try(Action statement)
+        {
+            var result = new Container<T>();
+
+            try
+            {
+                statement.Invoke();
+            }
+            catch (Exception ex)
+            {
+                result.Error = ex;
+                result.HasError = true;
+            }
+
+            return result;
+        }
 
         public Container<T> Try(Func<T> statement)
         {
-            Container<T> result = new Container<T>();
+            var result = new Container<T>();
 
             try
             {
@@ -39,5 +56,6 @@ namespace Muzzle
 
             return this;
         }
+
     }
 }

@@ -16,7 +16,7 @@ namespace Test
                 .Try(() => { return 1 + 2; })
                 .Catch(ex => { Console.WriteLine(ex.Message); }
             );
-
+            
             Assert.IsNull(test.Error);
             Assert.IsFalse(test.HasError);
             Assert.AreEqual<int>(3, test.PayLoad);
