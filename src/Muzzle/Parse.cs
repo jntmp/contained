@@ -10,44 +10,56 @@ namespace Muzzle
     {
         public static int Int(object value, int defaultVal = 0)
         {
-            var result = defaultVal;
-            int.TryParse(value.ToString(), out result);
-            return result;
+            int result;
+            if (!int.TryParse(value.ToString(), out result))
+                return defaultVal;
+            else
+                return result;
         }
 
         public static decimal Decimal(object value, decimal defaultVal = 0.00m)
         {
-            var result = defaultVal;
-            decimal.TryParse(value.ToString(), out result);
-            return result;
+            decimal result;
+            if (!decimal.TryParse(value.ToString(), out result))
+                return defaultVal;
+            else
+                return result;
         }
 
         public static Guid Guid_(object value)
         {
-            var result = Guid.Empty;
-            Guid.TryParse(value.ToString(), out result);
-            return result;            
+            Guid result;
+            if (!Guid.TryParse(value.ToString(), out result))
+                return Guid.Empty;
+            else
+                return result;
         }
 
         public static float Float(object value, float defaultVal = 0.00f)
         {
-            var result = defaultVal;
-            float.TryParse(value.ToString(), out result);
-            return result;
+            float result;
+            if (!float.TryParse(value.ToString(), out result))
+                return defaultVal;
+            else
+                return result;
         }
 
         public static long Long(object value, long defaultVal = 0)
         {
-            var result = defaultVal;
-            long.TryParse(value.ToString(), out result);
-            return result;
+            long result;
+            if (!long.TryParse(value.ToString(), out result))
+                return defaultVal;
+            else
+                return result;
         }
 
         public static DateTime DateTime_(object value, DateTime defaultVal)
         {
-            var result = defaultVal;
-            DateTime.TryParse(value.ToString(), out result);
-            return result;
+            DateTime result;
+            if (!DateTime.TryParse(value.ToString(), out result))
+                return defaultVal;
+            else
+                return result;
         }
     }
 }

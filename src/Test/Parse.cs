@@ -72,8 +72,8 @@ namespace Test
         [TestMethod]
         public void ParseFailFloat()
         {
-            var actual = Muzzle.Parse.Float("abc");
-            var expected = 0;
+            var actual = Muzzle.Parse.Float("abc", -1f);
+            var expected = -1f;
 
             Assert.AreEqual(actual, expected);
         }
