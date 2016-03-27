@@ -12,9 +12,8 @@ namespace Test
         [TestMethod]
         public void TrySuccessInt()
         {
-            var test = new Container<int>()
-                .Try(() => { return 1 + 2; })
-                .Catch(ex => { Console.WriteLine(ex.Message); }
+            var test = Api.Instance.Contain<int>(
+                () => { return 1 + 2; }
             );
             
             Assert.IsNull(test.Error);
@@ -25,17 +24,14 @@ namespace Test
         [TestMethod]
         public void TrySuccessList()
         {
-            var test = new Container<List<String>>()
-                .Try(() =>
+            var test = Api.Instance.Contain<List<String>>(() =>
                 {
                     var list = new List<String>();
                     list.Add("123");
                     list.Add("456");
                     list.Add("789");
                     return list;
-                })
-                .Catch(ex => { Console.WriteLine(ex.Message); }
-            );
+                });
 
             Assert.IsNull(test.Error);
             Assert.IsFalse(test.HasError);
@@ -47,9 +43,8 @@ namespace Test
         {
             int brokenMath = 0;
 
-            var test = new Container<int>()
-                .Try(() => { return 10 / brokenMath; })
-                .Catch(ex => { Console.WriteLine(ex.Message); }
+            var test = Api.Instance.Contain<int>(
+                () => { return 10 / brokenMath; }
             );
 
             Assert.IsNotNull(test.Error);
@@ -62,10 +57,9 @@ namespace Test
         {
             int brokenMath = 0;
 
-            var test = new Container<int>()
-                .Try(() => { return 10 / brokenMath; })
-                .Else(() => { return 10 / 10; })
-                .Catch(ex => { Console.WriteLine(ex.Message); });
+            var test = Api.Instance.Contain<int>(
+                () => { return 10 / brokenMath; })
+                .Else(() => { return 10 / 10; });
 
             Assert.IsNull(test.Error);
             Assert.IsFalse(test.HasError);
@@ -78,8 +72,8 @@ namespace Test
             int brokenMath = 0;
             int elseBroken = 0;
 
-            var test = new Container<int>()
-                .Try(() => { return 10 / brokenMath; })
+            var test = Api.Instance.Contain<int>(
+                () => { return 10 / brokenMath; })
                 .Else(() => { return 10 / elseBroken; })
                 .Catch(ex => { Console.WriteLine(ex.Message); });
 
