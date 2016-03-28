@@ -75,5 +75,27 @@ namespace Test
             Assert.AreEqual<int>(sum, list.Sum());
         }
 
+        [TestMethod]
+        public void LoopAll()
+        {
+            var list = new List<int>(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 });
+            var sum = 0;
+
+            Muzzle.Loop.Each<int>(list, 
+                (li) => 
+                {
+                    sum += li;
+                },
+                new Muzzle.Loop.Options
+                {
+                    Parallel = true,
+                    Threads = 3,
+                    OnError = (ex) => { Console.WriteLine(ex.Message); },
+                    OnIteration = (i) => { Console.WriteLine($"{i} of {list.Count}"); }
+                });
+
+            Assert.AreEqual<int>(sum, list.Sum());
+        }
+
     }
 }

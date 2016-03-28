@@ -25,7 +25,7 @@ if(!test.HasError)
 
 ###### Parsing
 ``` c# 
-var val = Parse.Float("abc", -1f);
+var val = "1".ParseOrDefault<float>(-1f);
 
 if(val == -1f)
   Console.WriteLine("parse failed");
