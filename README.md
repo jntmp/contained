@@ -5,7 +5,7 @@ Simple contained statement execution.
 
 ###### Try/catch
 ``` c# 
-var test = Api.Instance.Contain<int>(
+var test = mApi.Contain<int>(
     () => { return 1 + 2; }
 );
 
@@ -25,7 +25,7 @@ if(!test.HasError)
 
 ###### Parsing
 ``` c# 
-var val = "1".ParseOrDefault<float>(-1f);
+var val = mApi.Parse<float>("1", -1f);
 
 if(val == -1f)
   Console.WriteLine("parse failed");
@@ -36,16 +36,10 @@ if(val == -1f)
 var list = new List<int>(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 });
 var sum = 0;
 
-Loop.Each<int>(list, 
-    (li) => 
-    {
-        sum += li;
-    },
-    new Loop.Options
-    {
-        Parallel = true,
-        Threads = 3,
-        OnError = (ex) => { Console.WriteLine(ex.Message); },
-        OnIteration = (i) => { Console.WriteLine($"{i} of {list.Count}"); }
+mApi.Iterate<int>(list, 
+    li => sum += li,
+	i => Console.WriteLine($"{i} of {list.Count}"),
+    ex => Console.WriteLine(ex.Message),
+    threads: 3
     });
 ```

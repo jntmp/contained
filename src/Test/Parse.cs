@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Muzzle;
+using mApi = Muzzle.Api;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -26,7 +26,7 @@ namespace Test
         [TestMethod]
         public void ParseSuccessInt()
         {
-            var actual = "1".ParseOrDefault<int>();
+            var actual = mApi.Parse<int>("1");
             var expected = 1;
 
             Assert.AreEqual(actual, expected);
@@ -35,7 +35,7 @@ namespace Test
         [TestMethod]
         public void ParseFailInt()
         {
-            var actual = "abc".ParseOrDefault<int>();
+            var actual = mApi.Parse<int>("abc");
             var expected = 0;
 
             Assert.AreEqual(actual, expected);
@@ -44,7 +44,7 @@ namespace Test
         [TestMethod]
         public void ParseSuccessLong()
         {
-            var actual = "1".ParseOrDefault<long>();
+            var actual = mApi.Parse<long>("1");
             var expected = 1;
 
             Assert.AreEqual(actual, expected);
@@ -53,7 +53,7 @@ namespace Test
         [TestMethod]
         public void ParseFailLong()
         {
-            var actual = "abc".ParseOrDefault<long>();
+            var actual = mApi.Parse<long>("abc");
             var expected = 0;
 
             Assert.AreEqual(actual, expected);
@@ -62,7 +62,7 @@ namespace Test
         [TestMethod]
         public void ParseSuccessDecimal()
         {
-            var actual = "1.12".ParseOrDefault<decimal>();
+            var actual = mApi.Parse<decimal>("1.12");
             var expected = 1.12m;
 
             Assert.AreEqual(actual, expected);
@@ -71,7 +71,7 @@ namespace Test
         [TestMethod]
         public void ParseFailDecimal()
         {
-            var actual = "abc".ParseOrDefault<decimal>();
+            var actual = mApi.Parse<decimal>("abc");
             var expected = 0;
 
             Assert.AreEqual(actual, expected);
@@ -80,7 +80,7 @@ namespace Test
         [TestMethod]
         public void ParseSuccessFloat()
         {
-            var actual = "1.12".ParseOrDefault<float>();
+            var actual = mApi.Parse<float>("1.12");
             var expected = 1.12f;
 
             Assert.AreEqual(actual, expected);
@@ -89,7 +89,7 @@ namespace Test
         [TestMethod]
         public void ParseFailFloat()
         {
-            var actual = "abc".ParseOrDefault<float>(-1f);
+            var actual = mApi.Parse<float>("abc", -1f);
             var expected = -1f;
 
             Assert.AreEqual(actual, expected);
@@ -98,7 +98,7 @@ namespace Test
         [TestMethod]
         public void ParseSuccesGuid()
         {
-            var actual = "a84145de-e516-4ff3-8769-b8c678b528ca".ParseOrDefault<Guid>();
+            var actual = mApi.Parse<Guid>("a84145de-e516-4ff3-8769-b8c678b528ca");
             var expected = new Guid("a84145de-e516-4ff3-8769-b8c678b528ca");
 
             Assert.AreEqual(actual, expected);
@@ -107,7 +107,7 @@ namespace Test
         [TestMethod]
         public void ParseFailGuid()
         {
-            var actual = "abc".ParseOrDefault<Guid>();
+            var actual = mApi.Parse<Guid>("abc");
             var expected = Guid.Empty;
 
             Assert.AreEqual(actual, expected);
@@ -118,7 +118,7 @@ namespace Test
         {
             var val = DateTime.Now.Date;
             var expected = val.ToString();
-            var actual = expected.ParseOrDefault<DateTime>();
+            var actual = mApi.Parse<DateTime>(expected);
 
             //Assert.IsTrue(DateTime.Compare(actual, expected) == 0);
             Assert.AreEqual<DateTime>(actual, val);
@@ -127,7 +127,7 @@ namespace Test
         [TestMethod]
         public void ParseFailDateTime()
         {
-            var actual = "abc".ParseOrDefault<DateTime>();
+            var actual = mApi.Parse<DateTime>("abc");
             var expected = DateTime.MinValue;
 
             Assert.AreEqual(actual, expected);
@@ -146,12 +146,13 @@ namespace Test
             var sw = new Stopwatch();
 
             sw.Start();
-            list.ForEach(l => l.ParseOrDefault<int>());
+            list.ForEach(l => mApi.Parse<int>(l));
             sw.Stop();
             TestContext.WriteLine($"ParseOrDefault 1mil: {sw.Elapsed.TotalSeconds} seconds");
 
             sw.Restart();
-            list.ForEach(l => {
+            list.ForEach(l =>
+            {
                 var result = 0;
                 int.TryParse(l, out result);
             });

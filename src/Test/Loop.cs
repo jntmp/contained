@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using mApi = Muzzle.Api;
 
 namespace Test
 {
@@ -17,8 +18,8 @@ namespace Test
 
             var sum = 0;
 
-            Muzzle.Loop.Each<int>(list, (i) => { sum += i; });
-
+            mApi.Iterate<int>(list, i => sum += i);
+            
             Assert.AreEqual<int>(sum, list.Sum());
         }
 
@@ -29,12 +30,7 @@ namespace Test
 
             var sum = 0;
 
-            var options = new Muzzle.Loop.Options
-            {
-                OnIteration = (t) => { sum += t; }
-            };
-
-            Muzzle.Loop.Each<int>(list, (i) => {  }, options);
+            mApi.Iterate<int>(list, i => { }, t => sum += t);
 
             Assert.AreEqual<int>(sum, list.Sum());
         }
@@ -46,12 +42,10 @@ namespace Test
 
             Exception error = null;
 
-            var options = new Muzzle.Loop.Options
-            {
-                OnError = (ex) => { error = ex; }
-            };
-
-            Muzzle.Loop.Each<int>(list, (i) => { var x = 5 / i; }, options);
+            mApi.Iterate<int>(list, 
+                i => { var x = 5 / i; }, 
+                null, 
+                ex => error = ex);
 
             Assert.IsNotNull(error);
         }
@@ -64,14 +58,8 @@ namespace Test
 
             var sum = 0;
 
-            var options = new Muzzle.Loop.Options
-            {
-                Parallel = true,
-                Threads = 3
-            };
-
-            Muzzle.Loop.Each<int>(list, (i) => { sum += i; }, options);
-
+            mApi.Iterate<int>(list, i => sum += i, null, null, 3);
+            
             Assert.AreEqual<int>(sum, list.Sum());
         }
 
@@ -81,18 +69,11 @@ namespace Test
             var list = new List<int>(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 });
             var sum = 0;
 
-            Muzzle.Loop.Each<int>(list, 
-                (li) => 
-                {
-                    sum += li;
-                },
-                new Muzzle.Loop.Options
-                {
-                    Parallel = true,
-                    Threads = 3,
-                    OnError = (ex) => { Console.WriteLine(ex.Message); },
-                    OnIteration = (i) => { Console.WriteLine($"{i} of {list.Count}"); }
-                });
+            mApi.Iterate<int>(list, 
+                li => sum += li,
+                i => Console.WriteLine($"{i} of {list.Count}"),
+                ex => Console.WriteLine(ex.Message),
+                3);
 
             Assert.AreEqual<int>(sum, list.Sum());
         }

@@ -12,10 +12,10 @@ namespace Test
         [TestMethod]
         public void TrySuccessInt()
         {
-            var test = Api.Instance.Contain<int>(
+            var test = Api.Contain<int>(
                 () => { return 1 + 2; }
             );
-            
+
             Assert.IsNull(test.Error);
             Assert.IsFalse(test.HasError);
             Assert.AreEqual<int>(3, test.PayLoad);
@@ -24,7 +24,7 @@ namespace Test
         [TestMethod]
         public void TrySuccessList()
         {
-            var test = Api.Instance.Contain<List<String>>(() =>
+            var test = Api.Contain<List<String>>(() =>
                 {
                     var list = new List<String>();
                     list.Add("123");
@@ -43,7 +43,7 @@ namespace Test
         {
             int brokenMath = 0;
 
-            var test = Api.Instance.Contain<int>(
+            var test = Api.Contain<int>(
                 () => { return 10 / brokenMath; }
             );
 
@@ -57,7 +57,7 @@ namespace Test
         {
             int brokenMath = 0;
 
-            var test = Api.Instance.Contain<int>(
+            var test = Api.Contain<int>(
                 () => { return 10 / brokenMath; })
                 .Else(() => { return 10 / 10; });
 
@@ -72,7 +72,7 @@ namespace Test
             int brokenMath = 0;
             int elseBroken = 0;
 
-            var test = Api.Instance.Contain<int>(
+            var test = Api.Contain<int>(
                 () => { return 10 / brokenMath; })
                 .Else(() => { return 10 / elseBroken; })
                 .Catch(ex => { Console.WriteLine(ex.Message); });

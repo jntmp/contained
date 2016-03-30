@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Muzzle
 {
-    public class Loop
+    public static class Loop
     {
         public class Options
         {
@@ -18,9 +19,13 @@ namespace Muzzle
 
             public Action<int> OnIteration { get; set; }
             public Action<Exception> OnError { get; set; }
-            public bool Parallel { get; set; }
             public int Threads { get; set; }
         }
+
+        //public static void Each(this List<int> list, Action<int> iteration, Action<int> OnIteration)
+        //{
+        //    Parallel.ForEach>(list, f => iteration.Invoke(f));
+        //}
 
         public static void Each<T>(IEnumerable<T> list, Action<T> iteration)
         {

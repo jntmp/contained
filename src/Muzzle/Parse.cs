@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Muzzle
 {
-    public static class Parse
+    internal static class Parsing
     {
-        public static T ParseOrDefault<T>(this string obj, T defaultVal = default(T))
+        internal static T ParseOrDefault<T>(string val, T defaultVal = default(T))
         {
             var result = Activator.CreateInstance<T>();
 
@@ -17,9 +17,9 @@ namespace Muzzle
             if (parseMethod == null)
                 throw new Exception($"Type {result.GetType().Name} not supported by ParseOrDefault.");
 
-            var parameters = new object[] { obj, null };
+            var parameters = new object[] { val, null };
 
-            if (!(bool)parseMethod.Invoke(obj, parameters))
+            if (!(bool)parseMethod.Invoke(val, parameters))
                 return defaultVal;
             else
                 return (T)parameters[1];
