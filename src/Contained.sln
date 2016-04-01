@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Muzzle", "Muzzle\Muzzle.csproj", "{E6540A68-2E09-42B9-B39A-D0A2B292014E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contained", "Contained\Contained.csproj", "{E6540A68-2E09-42B9-B39A-D0A2B292014E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{9BBDACAD-EC7E-4B52-BE98-E524D0ECE73D}"
 EndProject

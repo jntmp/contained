@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Muzzle
+namespace Contained
 {
     public static class Api
     {

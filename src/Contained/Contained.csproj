@@ -7,8 +7,8 @@
     <ProjectGuid>{E6540A68-2E09-42B9-B39A-D0A2B292014E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Muzzle</RootNamespace>
-    <AssemblyName>Muzzle</AssemblyName>
+    <RootNamespace>Contained</RootNamespace>
+    <AssemblyName>Contained</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

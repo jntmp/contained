@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Muzzle
+namespace Contained
 {
     internal static class Parsing
     {

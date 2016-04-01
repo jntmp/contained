@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Muzzle
+namespace Contained
 {
     public static class Loop
     {

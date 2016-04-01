@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Muzzle
+namespace Contained
 {
     public class Container<T>
     {

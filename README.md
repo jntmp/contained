@@ -1,7 +1,7 @@
-# muzzle
+# Contained
 Simple contained statement execution.
 
-[![Build status](https://ci.appveyor.com/api/projects/status/p1h8h61ab5rfuhxb/branch/master?svg=true)](https://ci.appveyor.com/project/jonoxx/muzzle/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/p1h8h61ab5rfuhxb/branch/master?svg=true)](https://ci.appveyor.com/project/jntmp/contained/branch/master)
 
 ###### Try/catch
 ``` c# 

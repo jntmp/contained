@@ -58,9 +58,9 @@
     <Compile Include="Parse.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Muzzle\Muzzle.csproj">
+    <ProjectReference Include="..\Contained\Contained.csproj">
       <Project>{e6540a68-2e09-42b9-b39a-d0a2b292014e}</Project>
-      <Name>Muzzle</Name>
+      <Name>Contained</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
