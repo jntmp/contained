@@ -7,7 +7,8 @@
 
         <script type="text/javascript">
             navigator.geolocation.watchPosition(function(pos) {
-
+                var log = document.getElementById('log');
+                log.innerHTML += '<div style="float:left;">'+pos.coords.latitude+'-'+pos.coords.longitude+'</div>';
                 var map = L.map('map').setView([pos.coords.latitude, pos.coords.longitude], 15);
 
                 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -22,5 +23,6 @@
     </head>
 <body>
     <div id="map" style="height: 350px;width: 350px;"></div>
+    <div id="log"></div>
 </body>
 </html>
